@@ -2,7 +2,14 @@
   <q-layout view="lHr lpR fFf">
     <q-header bordered class="bg-white text-black">
       <q-toolbar>
-        <q-btn class="lt-md" dense flat round icon="menu" @click="toggleLeftDrawer" />
+        <q-btn
+          class="lt-md"
+          dense
+          flat
+          round
+          icon="menu"
+          @click="toggleLeftDrawer"
+        />
 
         <q-toolbar-title class="text-weight-bolder">
           <span class="gt-sm">{{ $route.name }}</span>
@@ -20,7 +27,14 @@
           </span>
         </q-toolbar-title>
 
-        <q-btn class="lt-md" dense flat round icon="search" @click="toggleRightDrawer" />
+        <q-btn
+          class="lt-md"
+          dense
+          flat
+          round
+          icon="search"
+          @click="toggleRightDrawer"
+        />
       </q-toolbar>
     </q-header>
 
@@ -81,20 +95,22 @@
       <q-list separator padding>
         <q-item class="q-pa-md">
           <q-item-section>
-            <q-item-label overline text="text-grey">Giáo dục</q-item-label>
-            <q-item-label class="text-weight-bold">Lorem Ispum</q-item-label>
-            <q-item-label caption
-              >Secondary line text. Lorem ipsum dolor sit amet, consectetur
-              adipiscit elit.</q-item-label
+            <q-item-label overline text="text-grey">MẸO</q-item-label>
+            <q-item-label class="text-weight-bold"
+              >Hãy xem chuyện gì diễn ra xung quanh bạn.</q-item-label
             >
+            <q-item-label caption>
+              Khám phá thế giới xung quanh bạn bằng cách kết nối với bạn bè bạn
+              quen biết. Hãy tìm kiếm họ trên Bettr.
+            </q-item-label>
           </q-item-section>
 
           <q-item-section side top>
-            <q-item-label caption>5 min ago</q-item-label>
+            <q-item-label caption>MỚI</q-item-label>
           </q-item-section>
         </q-item>
 
-        <q-item class="q-pa-md">
+        <!-- <q-item class="q-pa-md">
           <q-item-section>
             <q-item-label overline text="text-grey">Giáo dục</q-item-label>
             <q-item-label class="text-weight-bold">Lorem Ispum</q-item-label>
@@ -122,7 +138,7 @@
           <q-item-section side top>
             <q-item-label caption>5 min ago</q-item-label>
           </q-item-section>
-        </q-item>
+        </q-item> -->
       </q-list>
     </q-drawer>
 

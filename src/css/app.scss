@@ -1,6 +1,10 @@
 // app global css in SCSS form
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
+* {
+  user-select: none;
+}
+
 body {
   font-family: 'Open Sans', sans-serif;
 }
