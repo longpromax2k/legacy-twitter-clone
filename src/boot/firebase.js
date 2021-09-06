@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app';
+import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
 // TODO: Replace the following with your app's Firebase project configuration
@@ -8,7 +8,7 @@ const firebaseConfig = {
   projectId: "tatsuki-bettr",
   storageBucket: "tatsuki-bettr.appspot.com",
   messagingSenderId: "56634032715",
-  appId: "1:56634032715:web:9378308d5b9221f16cc3ce"
+  appId: "1:56634032715:web:9378308d5b9221f16cc3ce",
 };
 
 const app = initializeApp(firebaseConfig);

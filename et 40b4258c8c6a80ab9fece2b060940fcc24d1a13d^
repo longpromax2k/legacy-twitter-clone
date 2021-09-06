@@ -1,0 +1,42 @@
+[33mcommit 636ff45e14fc73de42d9b4448b455552b8f6d0b9[m[33m ([m[1;36mHEAD -> [m[1;32mlogin[m[33m, [m[1;31morigin/login[m[33m)[m
+Author: long <hoanglongnguyen.letter@gmail.com>
+Date:   Mon Sep 6 17:56:59 2021 +0700
+
+    create login
+
+[33mcommit 40b4258c8c6a80ab9fece2b060940fcc24d1a13d[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: long <hoanglongnguyen.letter@gmail.com>
+Date:   Sat Sep 4 22:55:53 2021 +0700
+
+    a
+
+[33mcommit 9dea21fde515d387871a339d82aff5a0c6a9a87e[m
+Author: long <hoanglongnguyen.letter@gmail.com>
+Date:   Sat Sep 4 22:32:47 2021 +0700
+
+    added core bettr features
+
+[33mcommit a8a8e9267dc7c148fc095db01f326b5d26e6fad5[m
+Merge: 3295200 accf535
+Author: long <hoanglongnguyen.letter@gmail.com>
+Date:   Fri Sep 3 22:16:22 2021 +0700
+
+    Merge branch 'main' of github.com:tatsukigen/bettr
+
+[33mcommit 32952008fd1eb81e0a923018ea44b2457f3160fb[m
+Author: long <hoanglongnguyen.letter@gmail.com>
+Date:   Fri Sep 3 22:15:42 2021 +0700
+
+    remove vscode folder from local
+
+[33mcommit accf53551834b2a1b870e673a85e28bee7e0b927[m
+Author: long <hoanglongnguyen.letter@gmail.com>
+Date:   Fri Sep 3 22:15:17 2021 +0700
+
+    Delete .vscode directory
+
+[33mcommit 062038ef826346efb98174db2a3665dea85da363[m
+Author: long <hoanglongnguyen.letter@gmail.com>
+Date:   Fri Sep 3 22:02:30 2021 +0700
+
+    initial commit

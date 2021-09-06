@@ -72,6 +72,7 @@
                   size="sm"
                 />
                 <q-btn
+                  @click="toggleComment()"
                   flat
                   round
                   color="grey"
@@ -113,12 +114,14 @@ import { formatDistance } from "date-fns";
 
 export default defineComponent({
   name: "PageHome",
+
   data() {
     return {
       newBettrContent: "",
       posts: [],
     };
   },
+
   methods: {
     async addNewPost() {
       let newPost = {
@@ -140,12 +143,18 @@ export default defineComponent({
         liked: !post.liked,
       });
     },
+    toggleComment() {
+      this.newBettrContent = `Trả lời @タツキ:
+      `;
+    },
   },
+
   filter: {
     relativeDate(value) {
       return formatDistance(value, new Date());
     },
   },
+
   mounted() {
     const mountPost = query(collection(db, "posts"), orderBy("date"));
     const unsubscribe = onSnapshot(mountPost, (snapshot) => {

@@ -68,12 +68,28 @@
           <q-item-section class="text-h6">Trang chủ</q-item-section>
         </q-item>
 
+        <q-item clickable v-ripple exact>
+          <q-item-section avatar>
+            <q-avatar color="pink-7" text-color="white" icon="people" />
+          </q-item-section>
+
+          <q-item-section class="text-h6">Mọi người</q-item-section>
+        </q-item>
+
         <q-item to="/about" clickable v-ripple exact>
           <q-item-section avatar>
             <q-avatar color="pink-7" text-color="white" icon="info" />
           </q-item-section>
 
           <q-item-section class="text-h6">Thông tin</q-item-section>
+        </q-item>
+
+        <q-item to="/" clickable v-ripple exact>
+          <q-item-section avatar>
+            <q-avatar color="pink-7" text-color="white" icon="logout" />
+          </q-item-section>
+
+          <q-item-section class="text-h6">Đăng xuất</q-item-section>
         </q-item>
       </q-list>
     </q-drawer>
