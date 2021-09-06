@@ -54,10 +54,6 @@
             <q-item-section>
               <q-item-label class="text-subtitle1">
                 <strong>タツキ</strong>
-                <span class="text-grey-7">
-                  @tatsuki
-                  <!-- <br class="lt-md"> &bull; {{ post.date }}  -->
-                </span>
               </q-item-label>
               <q-item-label class="posts-content text-body1">
                 {{ post.content }}
