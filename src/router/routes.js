@@ -1,14 +1,34 @@
 const routes = [
   {
     path: "/",
+    component: () => import("layouts/LoginLayout.vue"),
+    children: [
+      {
+        path: "",
+        component: () => import("src/pages/PageLogin.vue"),
+        name: "👋 ĐĂNG NHẬP",
+      },
+      {
+        path: "/join",
+        component: () => import("src/pages/PageJoin.vue"),
+        name: "🥳 ĐĂNG KÝ",
+      },
+    ],
+  },
+  {
+    path: "/home",
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "",
-      component: () => import("src/pages/PageHome.vue"),
-      name: "🏠 NHÀ" },
-      { path: "/about",
-      component: () => import("src/pages/PageAbout.vue"),
-      name: "😀 THÔNG TIN"},
+      {
+        path: "",
+        component: () => import("src/pages/PageHome.vue"),
+        name: "🏠 NHÀ",
+      },
+      {
+        path: "/about",
+        component: () => import("src/pages/PageAbout.vue"),
+        name: "😀 THÔNG TIN",
+      },
     ],
   },
 

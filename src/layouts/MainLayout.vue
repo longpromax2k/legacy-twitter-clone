@@ -25,6 +25,7 @@
               <circle cx="37" cy="37" r="37" fill="#DB4D6D" />
             </svg>
           </span>
+
         </q-toolbar-title>
 
         <q-btn
@@ -59,7 +60,7 @@
       </svg>
 
       <q-list bordered>
-        <q-item to="/" clickable v-ripple exact>
+        <q-item to="/home/" clickable v-ripple exact>
           <q-item-section avatar>
             <q-avatar color="pink-7" text-color="white" icon="home" />
           </q-item-section>
