@@ -16,12 +16,33 @@
 
           <q-input
             filled
+            v-model="username"
+            label="Tên người dùng"
+            lazy-rules
+            :rules="[
+              (val) => (val && val.length > 0) || 'Không được để trống ô này',
+            ]"
+          />
+
+          <q-input
+            filled
             type="password"
             v-model="password"
             label="Mật khẩu"
             lazy-rules
             :rules="[
               (val) => (val && val.length > 0) || 'Không được để trống ô này',
+            ]"
+          />
+
+          <q-input
+            filled
+            type="password"
+            v-model="reTypePasswd"
+            label="Nhập lại mật khẩu"
+            lazy-rules
+            :rules="[
+              // (val) => (val && val.length > 0) || 'Không được để trống ô này', -->
             ]"
           />
 
@@ -47,22 +68,49 @@
 </template>
 
 <script>
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import db from "src/boot/firebase";
+import { doc, setDoc } from "firebase/firestore";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { defineComponent } from "vue";
 
 const auth = getAuth();
 
 export default defineComponent({
   methods: {
-    onSubmit() {
+    async onSubmit() {
+      // Add Authentication
       createUserWithEmailAndPassword(auth, this.email, this.password);
-      this.$router.push("/home");
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          this.uid = user.uid;
+          this.$router.push("/home");
+        } else {
+          // User is signed out
+          this.$router.push("/");
+        }
+      });
+
+      // Save and Initial Users Information
+      let newUser = {
+        username: this.username,
+        followed: [],
+        posts: [],
+        liked: [],
+      };
+
+      await setDoc(doc(db, "users", this.uid), newUser);
     },
   },
   data() {
     return {
       email: "",
       password: "",
+      username: "",
     };
   },
 });

@@ -125,7 +125,7 @@ export default defineComponent({
         date: Date.now(),
         liked: false,
       };
-      // this.posts.unshift(newPost);
+      
       const postRef = await addDoc(collection(db, "posts"), newPost);
 
       this.newBettrContent = "";
