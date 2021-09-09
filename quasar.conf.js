@@ -6,6 +6,7 @@
 // Configuration for your app
 // https://v2.quasar.dev/quasar-cli/quasar-conf-js
 
+const { Firestore } = require("@firebase/firestore");
 const { configure } = require("quasar/wrappers");
 
 module.exports = configure(function (ctx) {
@@ -19,9 +20,7 @@ module.exports = configure(function (ctx) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli/boot-files
-    boot: [
-      "firebase"
-    ],
+    boot: ["firebase", "auth", "firestore"],
 
     // https://v2.quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: ["app.scss"],

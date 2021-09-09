@@ -61,23 +61,19 @@ export default defineComponent({
         .then((userCredential) => {
           // Signed in
           const user = userCredential.user;
-          console.log(user);
-          // ...
+          this.$router.push("/home");
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
+          alert("Sai mật khẩu");
 
-          console.log(errorCode);
-          console.log(errorMessage);
         });
-      this.$router.push("/home");
     },
   },
   data() {
     return {
       email: "",
       password: "",
+      error: "",
     };
   },
 });

@@ -21,11 +21,10 @@
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <ellipse cx="79.5" cy="37" rx="37.5" ry="37" fill="#113285" />
-              <circle cx="37" cy="37" r="37" fill="#DB4D6D" />
+              <ellipse cx="79.5" cy="37" rx="37.5" ry="37" fill="#113285"/>
+              <circle cx="37" cy="37" r="37" fill="#DB4D6D"/>
             </svg>
           </span>
-
         </q-toolbar-title>
 
         <q-btn
@@ -54,23 +53,23 @@
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <rect width="128" height="128" fill="white" />
-        <ellipse cx="77.5" cy="64" rx="23.5" ry="23" fill="#113285" />
-        <circle cx="51" cy="64" r="23" fill="#DB4D6D" />
+        <rect width="128" height="128" fill="white"/>
+        <ellipse cx="77.5" cy="64" rx="23.5" ry="23" fill="#113285"/>
+        <circle cx="51" cy="64" r="23" fill="#DB4D6D"/>
       </svg>
 
-      <q-list bordered>
+      <q-list class="menu-border">
         <q-item to="/home/" clickable v-ripple exact>
           <q-item-section avatar>
-            <q-avatar color="pink-7" text-color="white" icon="home" />
+            <q-avatar color="pink-7" text-color="white" icon="home"/>
           </q-item-section>
 
           <q-item-section class="text-h6">Trang chủ</q-item-section>
         </q-item>
 
-        <q-item clickable v-ripple exact>
+        <q-item to="/people" clickable v-ripple exact>
           <q-item-section avatar>
-            <q-avatar color="pink-7" text-color="white" icon="people" />
+            <q-avatar color="pink-7" text-color="white" icon="people"/>
           </q-item-section>
 
           <q-item-section class="text-h6">Mọi người</q-item-section>
@@ -78,20 +77,22 @@
 
         <q-item to="/about" clickable v-ripple exact>
           <q-item-section avatar>
-            <q-avatar color="pink-7" text-color="white" icon="info" />
+            <q-avatar color="pink-7" text-color="white" icon="info"/>
           </q-item-section>
 
           <q-item-section class="text-h6">Thông tin</q-item-section>
         </q-item>
 
-        <q-item to="/" clickable v-ripple exact>
+        <q-item @click="logOut()" clickable v-ripple exact>
           <q-item-section avatar>
-            <q-avatar color="pink-7" text-color="white" icon="logout" />
+            <q-avatar color="pink-7" text-color="white" icon="logout"/>
           </q-item-section>
 
           <q-item-section class="text-h6">Đăng xuất</q-item-section>
         </q-item>
       </q-list>
+      <strong>Developer Mode</strong>
+      <p>Current UID: {{ (currentUser != null) ? currentUser.uid : "none" }}</p>
     </q-drawer>
 
     <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>
@@ -105,7 +106,7 @@
         dense
       >
         <template v-slot:prepend>
-          <q-icon name="search" />
+          <q-icon name="search"/>
         </template>
       </q-input>
 
@@ -114,7 +115,8 @@
           <q-item-section>
             <q-item-label overline text="text-grey">MẸO</q-item-label>
             <q-item-label class="text-weight-bold"
-              >Hãy xem chuyện gì diễn ra xung quanh bạn.</q-item-label
+            >Hãy xem chuyện gì diễn ra xung quanh bạn.
+            </q-item-label
             >
             <q-item-label caption>
               Khám phá thế giới xung quanh bạn bằng cách kết nối với bạn bè bạn
@@ -126,49 +128,32 @@
             <q-item-label caption>MỚI</q-item-label>
           </q-item-section>
         </q-item>
-
-        <!-- <q-item class="q-pa-md">
-          <q-item-section>
-            <q-item-label overline text="text-grey">Giáo dục</q-item-label>
-            <q-item-label class="text-weight-bold">Lorem Ispum</q-item-label>
-            <q-item-label caption
-              >Secondary line text. Lorem ipsum dolor sit amet, consectetur
-              adipiscit elit.</q-item-label
-            >
-          </q-item-section>
-
-          <q-item-section side top>
-            <q-item-label caption>5 min ago</q-item-label>
-          </q-item-section>
-        </q-item>
-
-        <q-item class="q-pa-md">
-          <q-item-section>
-            <q-item-label overline text="text-grey">Giáo dục</q-item-label>
-            <q-item-label class="text-weight-bold">Lorem Ispum</q-item-label>
-            <q-item-label caption
-              >Secondary line text. Lorem ipsum dolor sit amet, consectetur
-              adipiscit elit.</q-item-label
-            >
-          </q-item-section>
-
-          <q-item-section side top>
-            <q-item-label caption>5 min ago</q-item-label>
-          </q-item-section>
-        </q-item> -->
       </q-list>
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view/>
     </q-page-container>
   </q-layout>
 </template>
 
 <script>
 import { ref } from "vue";
+import { getAuth, signOut } from "firebase/auth";
+
+const auth = getAuth();
 
 export default {
+  data() {
+    return {
+      currentUser: auth.currentUser,
+    };
+  },
+  mounted() {
+    if (typeof this.currentUser === "undefined") {
+      this.$router.push("/");
+    }
+  },
   setup() {
     const leftDrawerOpen = ref(false);
     const rightDrawerOpen = ref(false);
@@ -185,5 +170,24 @@ export default {
       },
     };
   },
+
+  methods: {
+    async logOut() {
+      try {
+        const data = await auth.signOut().then(() => {
+          this.$router.push("/");
+        });
+      } catch (err) {
+        console.log(err);
+      }
+    },
+  },
 };
 </script>
+
+<style lang="scss">
+.menu-border {
+  border-top: 1px solid #42424226;
+  border-bottom: 1px solid #42424226;
+}
+</style>

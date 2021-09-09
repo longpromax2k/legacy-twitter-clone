@@ -29,6 +29,11 @@ const routes = [
         component: () => import("src/pages/PageAbout.vue"),
         name: "😀 THÔNG TIN",
       },
+      {
+        path: "/people",
+        component: () => import("src/pages/PagePeople.vue"),
+        name: "👥 MỌI NGƯỜI",
+      },
     ],
   },
 
@@ -39,5 +44,7 @@ const routes = [
     component: () => import("pages/Error404.vue"),
   },
 ];
+
+
 
 export default routes;

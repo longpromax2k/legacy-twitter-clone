@@ -83,7 +83,8 @@
                   icon="remove_circle_outline"
                   size="sm"
                 />
-                <q-btn flat round color="grey" icon="ios_share" size="sm" />
+                <q-btn @click="getUserInfo()"
+                 flat round color="grey" icon="ios_share" size="sm" />
               </div>
             </q-item-section>
           </q-item>
@@ -94,7 +95,7 @@
 </template>
 
 <script>
-import db from "src/boot/firebase";
+import db from "src/boot/firestore";
 import {
   doc,
   collection,
@@ -104,9 +105,13 @@ import {
   updateDoc,
   deleteDoc,
   addDoc,
+  getDoc,
 } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 import { defineComponent } from "vue";
 import { formatDistance } from "date-fns";
+
+const auth = getAuth();
 
 export default defineComponent({
   name: "PageHome",
@@ -119,13 +124,34 @@ export default defineComponent({
   },
 
   methods: {
+    async getUserInfo() {
+      let id = auth.currentUser.uid;
+      const userRef = doc(db, "users", id);
+      const docSnap = await getDoc(userRef);
+
+      console.log(id);
+
+      if (docSnap.exists()) {
+        console.log("Document data:", docSnap.data());
+      } else {
+        console.log("No such document!");
+      }
+
+      return {
+        followed: [],
+        liked: [],
+        posts: [],
+        username: "",
+      };
+    },
+
     async addNewPost() {
       let newPost = {
         content: this.newBettrContent,
         date: Date.now(),
         liked: false,
       };
-      
+
       const postRef = await addDoc(collection(db, "posts"), newPost);
 
       this.newBettrContent = "";
@@ -140,7 +166,7 @@ export default defineComponent({
       });
     },
     toggleComment() {
-      this.newBettrContent = `Trả lời @タツキ:
+      this.newBettrContent = `Trả lời @aido:
       `;
     },
   },

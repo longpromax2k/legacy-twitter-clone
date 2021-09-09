@@ -38,7 +38,7 @@
         <circle cx="51" cy="64" r="23" fill="#DB4D6D" />
       </svg>
 
-      <q-list bordered>
+      <q-list class="menu-border">
         <q-item to="/" clickable v-ripple exact>
           <q-item-section avatar>
             <q-avatar color="pink-7" text-color="white" icon="login" />
@@ -79,3 +79,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+.menu-border {
+  border-top: 1px solid #42424226;
+  border-bottom: 1px solid #42424226;
+}
+</style>

@@ -68,7 +68,7 @@
 </template>
 
 <script>
-import db from "src/boot/firebase";
+import db from "src/boot/firestore";
 import { doc, setDoc } from "firebase/firestore";
 import {
   getAuth,
@@ -85,17 +85,8 @@ export default defineComponent({
       // Add Authentication
       createUserWithEmailAndPassword(auth, this.email, this.password);
 
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          this.uid = user.uid;
-          this.$router.push("/home");
-        } else {
-          // User is signed out
-          this.$router.push("/");
-        }
-      });
-
       // Save and Initial Users Information
+      this.uid = auth.currentUser.uid;
       let newUser = {
         username: this.username,
         followed: [],
@@ -104,6 +95,15 @@ export default defineComponent({
       };
 
       await setDoc(doc(db, "users", this.uid), newUser);
+
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          this.$router.push("/home");
+        } else {
+          // User is signed out
+          this.$router.push("/");
+        }
+      });
     },
   },
   data() {
@@ -111,6 +111,7 @@ export default defineComponent({
       email: "",
       password: "",
       username: "",
+      uid: "",
     };
   },
 });
