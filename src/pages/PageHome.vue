@@ -14,7 +14,7 @@
           >
             <template v-slot:before>
               <q-avatar size="xl">
-                <img src="../img/default.png" />
+                <img src="../img/default.png"/>
               </q-avatar>
             </template>
           </q-input>
@@ -32,7 +32,7 @@
         </div>
       </div>
 
-      <q-separator class="divider" size="10px" color="grey-2" />
+      <q-separator class="divider" size="10px" color="grey-2"/>
 
       <q-list separator>
         <transition-group
@@ -47,44 +47,47 @@
           >
             <q-item-section avatar top>
               <q-avatar size="xl">
-                <img src="../img/default.png" />
+                <img src="../img/default.png"/>
               </q-avatar>
             </q-item-section>
 
             <q-item-section>
               <q-item-label class="text-subtitle1">
-                <strong>タツキ</strong>
+                <strong> {{ post.username }} </strong>
               </q-item-label>
               <q-item-label class="posts-content text-body1">
                 {{ post.content }}
               </q-item-label>
               <div class="posts-icon row justify-between q-mt-sm">
-                <q-btn
-                  @click="toggleLiked(post)"
-                  flat
-                  round
-                  :color="post.liked ? 'pink-7' : 'grey'"
-                  :icon="post.liked ? 'favorite' : 'favorite_border'"
-                  size="sm"
-                />
-                <q-btn
-                  @click="toggleComment()"
-                  flat
-                  round
-                  color="grey"
-                  icon="chat_bubble_outline"
-                  size="sm"
-                />
-                <q-btn
-                  @click="deletePost(post)"
-                  flat
-                  round
-                  color="grey"
-                  icon="remove_circle_outline"
-                  size="sm"
-                />
-                <q-btn @click="getUserInfo()"
-                 flat round color="grey" icon="ios_share" size="sm" />
+                <div>
+                  <q-btn
+                    @click="toggleLiked(post)"
+                    flat
+                    round
+                    :color="post.liked ? 'pink-7' : 'grey'"
+                    :icon="post.liked ? 'favorite' : 'favorite_border'"
+                    size="sm"
+                  />
+                  <label class="text-grey-7">Thích</label>
+                </div>
+
+                <div>
+                  <q-btn
+                    @click="toggleComment()"
+                    flat
+                    round
+                    color="grey"
+                    icon="chat_bubble_outline"
+                    size="sm"
+                  />
+
+                  <label class="text-grey-7">Bình luận</label>
+                </div>
+
+                <div>
+                  <q-btn flat round color="grey" icon="ios_share" size="sm"/>
+                  <label class="text-grey-7">Chia sẻ</label>
+                </div>
               </div>
             </q-item-section>
           </q-item>
@@ -95,6 +98,7 @@
 </template>
 
 <script>
+import auth from "src/boot/auth";
 import db from "src/boot/firestore";
 import {
   doc,
@@ -103,61 +107,45 @@ import {
   orderBy,
   onSnapshot,
   updateDoc,
+  arrayUnion,
   deleteDoc,
   addDoc,
+  setDoc,
   getDoc,
 } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
-import { defineComponent } from "vue";
-import { formatDistance } from "date-fns";
 
-const auth = getAuth();
+import { defineComponent } from "vue";
+import { eventBus } from "src/boot/evtbus";
 
 export default defineComponent({
   name: "PageHome",
-
   data() {
     return {
+      username: "",
       newBettrContent: "",
       posts: [],
     };
   },
-
   methods: {
-    async getUserInfo() {
-      let id = auth.currentUser.uid;
-      const userRef = doc(db, "users", id);
-      const docSnap = await getDoc(userRef);
-
-      console.log(id);
-
-      if (docSnap.exists()) {
-        console.log("Document data:", docSnap.data());
-      } else {
-        console.log("No such document!");
-      }
-
-      return {
-        followed: [],
-        liked: [],
-        posts: [],
-        username: "",
-      };
-    },
 
     async addNewPost() {
       let newPost = {
+        userid: auth.currentUser.uid,
+        username: auth.currentUser.displayName,
         content: this.newBettrContent,
         date: Date.now(),
         liked: false,
       };
 
       const postRef = await addDoc(collection(db, "posts"), newPost);
+      const postId = postRef.id;
+
+      const userRef = doc(db, "users", auth.currentUser.uid);
+      await updateDoc(userRef, {
+        posts: arrayUnion(postId),
+      });
 
       this.newBettrContent = "";
-    },
-    async deletePost(post) {
-      await deleteDoc(doc(db, "posts", post.id));
     },
     async toggleLiked(post) {
       const likeRef = doc(db, "posts", post.id);
@@ -167,7 +155,7 @@ export default defineComponent({
     },
     toggleComment() {
       this.newBettrContent = `Trả lời @aido:
-      `;
+`;
     },
   },
 
@@ -177,7 +165,32 @@ export default defineComponent({
     },
   },
 
-  mounted() {
+  created() {
+    eventBus.on("getUsername", function (username) {
+      this.username = username;
+    });
+  },
+
+  async mounted() {
+    const userRef = doc(db, "users", auth.currentUser.uid);
+    const docSnap = await getDoc(userRef);
+
+    if (docSnap.exists()) {
+      console.log("Document data:", docSnap.data());
+    } else {
+      // doc.data() will be undefined in this case
+      console.log("No such document!");
+
+      let newUser = {
+        usrname: auth.currentUser.displayName,
+        followed: [],
+        posts: [],
+        liked: [],
+      };
+
+      await setDoc(doc(db, "users", auth.currentUser.uid), newUser);
+    }
+
     const mountPost = query(collection(db, "posts"), orderBy("date"));
     const unsubscribe = onSnapshot(mountPost, (snapshot) => {
       snapshot.docChanges().forEach((change) => {

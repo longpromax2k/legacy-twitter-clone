@@ -34,6 +34,11 @@ const routes = [
         component: () => import("src/pages/PagePeople.vue"),
         name: "👥 MỌI NGƯỜI",
       },
+      {
+        path: "/search",
+        component: () => import("src/pages/PageSearch.vue"),
+        name: "🔍 TÌM KIẾM",
+      },
     ],
   },
 

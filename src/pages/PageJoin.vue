@@ -68,37 +68,23 @@
 </template>
 
 <script>
-import db from "src/boot/firestore";
-import { doc, setDoc } from "firebase/firestore";
+import auth from "src/boot/auth";
 import {
-  getAuth,
+  updateProfile,
   createUserWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
 import { defineComponent } from "vue";
-
-const auth = getAuth();
 
 export default defineComponent({
   methods: {
     async onSubmit() {
       // Add Authentication
       createUserWithEmailAndPassword(auth, this.email, this.password);
-
-      // Save and Initial Users Information
-      this.uid = auth.currentUser.uid;
-      let newUser = {
-        username: this.username,
-        followed: [],
-        posts: [],
-        liked: [],
-      };
-
-      await setDoc(doc(db, "users", this.uid), newUser);
-
       onAuthStateChanged(auth, (user) => {
         if (user) {
           this.$router.push("/home");
+          updateProfile(auth.currentUser, { displayName: this.username, });
         } else {
           // User is signed out
           this.$router.push("/");
@@ -111,7 +97,6 @@ export default defineComponent({
       email: "",
       password: "",
       username: "",
-      uid: "",
     };
   },
 });

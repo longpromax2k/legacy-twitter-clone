@@ -138,21 +138,15 @@
 </template>
 
 <script>
+import auth from "src/boot/auth";
 import { ref } from "vue";
-import { getAuth, signOut } from "firebase/auth";
-
-const auth = getAuth();
+import { signOut } from "firebase/auth";
 
 export default {
   data() {
     return {
       currentUser: auth.currentUser,
     };
-  },
-  mounted() {
-    if (typeof this.currentUser === "undefined") {
-      this.$router.push("/");
-    }
   },
   setup() {
     const leftDrawerOpen = ref(false);
