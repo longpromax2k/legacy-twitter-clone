@@ -91,24 +91,19 @@
           <q-item-section class="text-h6">Đăng xuất</q-item-section>
         </q-item>
       </q-list>
-      <strong>Developer Mode</strong>
-      <p>Current UID: {{ (currentUser != null) ? currentUser.uid : "none" }}</p>
     </q-drawer>
 
     <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>
       <!-- drawer content -->
-      <q-input
-        placeholder="Tìm kiếm trên Bettr"
-        class="q-ma-md"
-        color="teal"
-        outlined
+      <q-btn
+        to="/search"
+        class="flex q-ma-md justify-center"
+        color="primary"
+        icon="search"
+        label="Tìm kiếm trên Bettr"
+        unelevated
         rounded
-        dense
-      >
-        <template v-slot:prepend>
-          <q-icon name="search"/>
-        </template>
-      </q-input>
+      />
 
       <q-list separator padding>
         <q-item class="q-pa-md">

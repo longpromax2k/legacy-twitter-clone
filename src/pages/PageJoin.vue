@@ -96,7 +96,7 @@ export default defineComponent({
     return {
       email: "",
       password: "",
-      username: "",
+      username: ""
     };
   },
 });

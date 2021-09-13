@@ -55,8 +55,6 @@
           <q-item-section class="text-h6">Đăng ký</q-item-section>
         </q-item>
       </q-list>
-      <strong>Developer Mode</strong>
-      <p>Current UID: {{ (currentUser != null) ? currentUser.uid : "none" }}</p>
     </q-drawer>
 
     <q-page-container>
