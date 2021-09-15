@@ -163,11 +163,10 @@ export default {
   methods: {
     async logOut() {
       try {
-        const data = await auth.signOut().then(() => {
-          this.$router.push("/");
-        });
+        const data = await auth.signOut();
+        this.$router.push("/")
       } catch (err) {
-        console.log(err);
+        //...
       }
     },
   },

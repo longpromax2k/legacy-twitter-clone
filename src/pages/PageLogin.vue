@@ -57,16 +57,8 @@ const auth = getAuth();
 export default defineComponent({
   methods: {
     onSubmit() {
-      signInWithEmailAndPassword(auth, this.email, this.password)
-        .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          this.$router.push("/home");
-        })
-        .catch((error) => {
-          alert("Sai mật khẩu");
-
-        });
+      signInWithEmailAndPassword(auth, this.email, this.password);
+      this.$router.push("/home")
     },
   },
   data() {

@@ -81,15 +81,7 @@ export default defineComponent({
     async onSubmit() {
       // Add Authentication
       createUserWithEmailAndPassword(auth, this.email, this.password);
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          this.$router.push("/home");
-          updateProfile(auth.currentUser, { displayName: this.username, });
-        } else {
-          // User is signed out
-          this.$router.push("/");
-        }
-      });
+      this.$router.push("/home")
     },
   },
   data() {

@@ -2,6 +2,7 @@
   <q-page class="relative-position">
     <q-scroll-area class="absolute full-width full-height">
       <q-input
+        v-model="searchInput"
         placeholder="Tìm kiếm trên Bettr"
         class="q-ma-md"
         color="teal"
@@ -55,7 +56,7 @@
 <script>
 import { defineComponent } from "vue";
 import db from "src/boot/firestore";
-import { collection, query, onSnapshot, orderBy } from "firebase/firestore";
+import { collection, query, onSnapshot, orderBy, where } from "firebase/firestore";
 
 export default defineComponent({
   name: "PageSearch",
@@ -63,11 +64,12 @@ export default defineComponent({
   data() {
     return {
       users: [],
+      searchInput: ""
     };
   },
 
   mounted() {
-    const mountUser = query(collection(db, "users"), orderBy("username"));
+    const mountUser = query(collection(db, "users"), where("username", "==", this.searchInput));
     const unsubscribe = onSnapshot(mountUser, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
         let userChange = change.doc.data();
