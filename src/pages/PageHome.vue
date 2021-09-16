@@ -121,6 +121,7 @@ export default defineComponent({
   name: "PageHome",
   data() {
     return {
+      currentUser: auth.currentUser,
       username: "",
       newBettrContent: "",
       posts: [],
@@ -136,6 +137,8 @@ export default defineComponent({
         date: Date.now(),
         liked: false,
       };
+
+      console.log(auth.currentUser.displayName);
 
       const postRef = await addDoc(collection(db, "posts"), newPost);
       const postId = postRef.id;
@@ -172,23 +175,6 @@ export default defineComponent({
   },
 
   async mounted() {
-    const userRef = doc(db, "users", auth.currentUser.uid);
-    const docSnap = await getDoc(userRef);
-
-    if (docSnap.exists()) {
-      // ...
-    } else {
-
-      let newUser = {
-        username: auth.currentUser.displayName,
-        followed: [],
-        posts: [],
-        liked: [],
-      };
-
-      await setDoc(doc(db, "users", auth.currentUser.uid), newUser);
-    }
-
     const mountPost = query(collection(db, "posts"), orderBy("date"));
     const unsubscribe = onSnapshot(mountPost, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
@@ -207,6 +193,23 @@ export default defineComponent({
         }
       });
     });
+
+    const userRef = doc(db, "users", this.currentUser.uid);
+    const docSnap = await getDoc(userRef);
+
+    if (docSnap.exists()) {
+      // ...
+    } else {
+
+      let newUser = {
+        username: this.currentUser.displayName,
+        followed: [],
+        posts: [],
+        liked: [],
+      };
+
+      await setDoc(doc(db, "users", auth.currentUser.uid), newUser);
+    }
   },
 });
 </script>

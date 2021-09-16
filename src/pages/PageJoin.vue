@@ -72,7 +72,6 @@ import auth from "src/boot/auth";
 import {
   updateProfile,
   createUserWithEmailAndPassword,
-  onAuthStateChanged,
 } from "firebase/auth";
 import { defineComponent } from "vue";
 
@@ -81,6 +80,7 @@ export default defineComponent({
     async onSubmit() {
       // Add Authentication
       createUserWithEmailAndPassword(auth, this.email, this.password);
+      updateProfile(auth.currentUser, {displayName: this.username})
       this.$router.push("/home")
     },
   },
