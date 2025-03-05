@@ -1,13 +1,13 @@
 <template>
   <q-page>
     <q-scroll-area class="q-pa-lg absolute full-width full-height">
-      <h4 class="q-mt-none q-mb-md text-weight-bold">Về Bettr</h4>
+      <h4 class="q-mt-none q-mb-md text-weight-bold">VềElon Musk clone</h4>
       <h5 class="q-mt-none q-mb-none">
-          Liên lạc cho nhau chưa bao giờ đơn giản hơn vậy.
+          Thoát khỏi simulation chamber
         </h5>
       <div class="text-body">
-        <a class="text-black" href="https://github.com/tatsukigen"><strong>NGUYỄN HOÀNG LONG</strong></a>
-        <p class="text-grey-7">@tatsuki</p>
+        <a class="text-black"<strong>NGUYỄN HOÀNG LONG</a>
+        <p class="text-grey-7">@long</p>
 
       <p>
         <a href="#">Điều khoản dịch vụ</a> <br>
@@ -18,7 +18,7 @@
       </p>
 
         <p>
-          &copy; 2021 Bettr.
+          &copy; 2021 Elon clone.
         </p>
       </div>
     </q-scroll-area>

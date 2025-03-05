@@ -1,6 +1,6 @@
-# bettr (bettr)
+# Twitter clone
 
-A lightweight social network
+Alternative to Elon Musk
 
 ## Install the dependencies
 ```bash

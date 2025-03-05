@@ -5,7 +5,7 @@
         <div class="col">
           <q-input
             class="new-post"
-            v-model="newBettrContent"
+            v-model="newtwitter-cloneContent"
             bottom-slots
             label="Chuyện gì đang diễn ra vậy?"
             counter
@@ -23,7 +23,7 @@
           <q-btn
             @click="addNewPost"
             class="q-mb-lg"
-            :disable="!newBettrContent"
+            :disable="!newtwitter-cloneContent"
             unelevated
             rounded
             color="primary"
@@ -55,7 +55,7 @@
               <q-item-label class="text-subtitle1">
                 <strong>タツキ</strong>
                 <span class="text-grey-7">
-                  @tatsuki
+                  @long
                   <!-- <br class="lt-md"> &bull; {{ post.date }}  -->
                 </span>
               </q-item-label>
@@ -115,21 +115,21 @@ export default defineComponent({
   name: "PageHome",
   data() {
     return {
-      newBettrContent: "",
+      newtwitter-cloneContent: "",
       posts: [],
     };
   },
   methods: {
     async addNewPost() {
       let newPost = {
-        content: this.newBettrContent,
+        content: this.newtwitter-cloneContent,
         date: Date.now(),
         liked: false,
       };
       // this.posts.unshift(newPost);
       const postRef = await addDoc(collection(db, "posts"), newPost);
 
-      this.newBettrContent = "";
+      this.newtwitter-cloneContent = "";
     },
     async deletePost(post) {
       await deleteDoc(doc(db, "posts", post.id));

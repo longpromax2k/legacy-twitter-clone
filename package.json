@@ -1,9 +1,9 @@
 {
-  "name": "bettr",
+  "name": "twitter-clone",
   "version": "0.0.1",
-  "description": "A lightweight social network",
-  "productName": "Bettr",
-  "author": "tatsuki",
+  "description": "Elon alternative",
+  "productName": "twitter-clone",
+  "author": "long",
   "private": true,
   "scripts": {
     "test": "echo \"No test specified\" && exit 0"

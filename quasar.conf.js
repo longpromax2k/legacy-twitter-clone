@@ -131,8 +131,8 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `bettr`,
-        short_name: `bettr`,
+        name: `twitter-clone`,
+        short_name: `twitter-clone`,
         description: `A lightweight social network`,
         display: "standalone",
         orientation: "portrait",
@@ -196,7 +196,7 @@ module.exports = configure(function (ctx) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: "bettr",
+        appId: "twitter-clone",
       },
 
       // "chain" is a webpack-chain object https://github.com/neutrinojs/webpack-chain

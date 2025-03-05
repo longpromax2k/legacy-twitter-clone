@@ -80,7 +80,7 @@
     <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>
       <!-- drawer content -->
       <q-input
-        placeholder="Tìm kiếm trên Bettr"
+        placeholder="Tìm kiếm trên twitter-clone"
         class="q-ma-md"
         color="teal"
         outlined
@@ -101,7 +101,7 @@
             >
             <q-item-label caption>
               Khám phá thế giới xung quanh bạn bằng cách kết nối với bạn bè bạn
-              quen biết. Hãy tìm kiếm họ trên Bettr.
+              quen biết. Hãy tìm kiếm họ trên twitter-clone.
             </q-item-label>
           </q-item-section>
 
